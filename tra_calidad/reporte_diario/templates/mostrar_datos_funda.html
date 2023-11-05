@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Información de Funda</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <h1>Información de Funda</h1>
+    <header>
+        <nav>
+          <ul>
+            <li><a href="{% url 'ingresar_funda' %}"><svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>ingresar_funda</a></li>
+            <li><a href="{% url 'home' %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></a></li>
+          </ul>
+        </nav>
+      </header>
+      <div clase= "container">
+        <table class="table table-striped mt-4">
+            <thead>
+                <tr>
+                    <th>Marca</th>
+                    <th>Peso</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for funda in datos_funda %}
+                <tr>
+                    <td>{{ funda.marca }}</td>
+                    <td>{{ funda.peso_funda }}</td>
+                    <td>
+                        <form method="POST" action="{% url 'eliminar_funda' funda.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                        </form>
+                    </td>
+                            
+                    </td>
+                </tr>
+                {% endfor %}
+    
+            </tbody>
+        </table>
+    </div>
+      
+</body>
+</html>

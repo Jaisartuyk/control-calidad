@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Detalles del Reporte</title>
+    <style>
+        /* Estilos CSS para el informe */
+        body {
+            font-family: Arial, sans-serif;
+            background: #005AA7;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #FFFDE4, #005AA7);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #FFFDE4, #005AA7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body> 
+    
+    <header>
+   
+    <!-- Otros elementos de la cabecera, como títulos o información adicional  -->
+    </header>
+    <div class="header">
+        <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+            <img src="/media/imagenes/Logo_Ferdera 1.jpg" alt="Logo" width="100" height="70" class="d-inline-block align-text-top"> 
+        </div>
+
+        <h2>Detalles del Reporte Diario</h2>
+    </div>
+    <main>
+        <div class="container py-4">
+            <header>
+                <nav>
+                  <ul>
+                    <li><a href="{% url 'ver-reportes' %}"><img src="/static/imagenes/baseline_logout_black_24dp.jpg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"></a></li>
+                  </ul>
+                </nav>
+              </header>
+            <div class="detalle-reporte">
+                <div class="table-responsive ty-2">
+                    <table class="table table-striped ">
+                        <div>
+                            <p>Analista: {{ reporte.nombre_analista }}</p>
+                            <p>Turno: {{ reporte.turno }}</p>
+                            <p>Presentación: {{ reporte.presentacion }}</p>
+                            <p>lote: {{ reporte.lote }}</p>
+                        </div>
+                        
+        
+                        <thead>
+                            <tr>
+                                <th>Descripción</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+        
+                        <tbody>
+                            <tr>
+                                <td>Hora</td>
+                                <td>{{ reporte.hora }}</td>
+                            </tr>
+                    
+                            <tr>
+                                <td>Fecha</td>
+                                <td>{{ reporte.fecha }}</td>
+                            </tr>
+                            <tr>
+                                <td>Marca de funda</td>
+                                <td>{{ reporte.marca_funda_manual }}</td>
+                            </tr>
+                            <tr>
+                                <td>Peso bruto</td>
+                                <td>{{ reporte.peso_bruto }}</td>
+                            </tr>
+                            
+                            <tr>
+                                <td>Peso sin funda</td>
+                                <td>{{ reporte.peso_sin_funda_manual }}</td>
+                            </tr>
+                    
+                            <tr>
+                                <td>Peso neto</td>
+                                <td>{{ reporte.peso_neto }}</td>
+                            </tr>
+                            <tr>
+                                <td>Clasificacion</td>
+                                <td>{{ reporte.clasificacion }}</td>
+                            </tr>
+                            <tr>
+                                <td>Cuentas por libras</td>
+                                <td>{{ reporte.cuenta_lbs }}</td>
+                            </tr>
+
+                            <tr>
+                                <td>Total de camarones</td>
+                                <td>{{ reporte.total_camaron }}</td>
+                            </tr>
+                    
+                            <tr>
+                                <td>Porcentaje de glaseo</td>
+                                <td>{{ reporte.porcentaje_glaseo }}</td>
+                            </tr>
+                    
+                            <tr>
+                                <td>Camarones grandes</td>
+                                <td>{{ reporte.camarones_grandes }}</td>
+                            </tr>
+                    
+                            <tr>
+                                <td>Camarones pequeños</td>
+                                <td>{{ reporte.camarones_pequenos }}</td>
+                            </tr>
+                    
+                            <tr>
+                                <td>Uniformidad</td>
+                                <td>{{ reporte.uniformidad }}</td>
+                            </tr>
+                        
+                            <tr>
+                                <th>Defectos</th>
+                                <th>Cantidad</th>
+                                <th>Porcentaje</th>
+                            </tr>
+                            {% for porcentaje_defecto in defectos_guardados %}
+                            <tr>
+                                <td>{{ porcentaje_defecto.defecto.nombre }}</td>
+                                <td>{{ porcentaje_defecto.cantidad }}</td>
+                                <td>{{ porcentaje_defecto.porcentaje }}</td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="3">No se han registrado defectos.</td>
+                            </tr>
+                            {% endfor %}
+                            <form method="post" action="{% url 'detalle-reporte' reporte_id=reporte.id %}">
+                                {% csrf_token %}
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Defecto</th>
+                                            <th>Cantidad</th>
+                                            <th>Porcentaje</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <select name="defecto" class="form-control" id="nuevo-defecto">
+                                                    <!-- Opciones para los defectos -->
+                                                    <option value="">Elige el defecto</option>
+                                                    <option value="Picado">Picado</option>
+                                                    <option value="Rosado leve">Rosado leve</option>
+                                                    <option value="Deshidratado">Deshidratado</option>
+                                                    <option value="Dañados o piezas">Dañados o piezas</option>
+                                                    <option value="Mudado">Mudado</option>
+                                                    <option value="Suave o quebrado">Suave o quebrado</option>
+                                                    <option value="Mal descabezado">Mal descabezado</option>
+                                                    <option value="Sin telson">Sin telson</option>
+                                                    <option value="Cascara">Cascara</option>
+                                                    <!-- Agregar otras opciones aquí -->
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input type="number" name="cantidad" id="nueva-cantidad" placeholder="Cantidad">
+                                            </td>
+                                            <td>
+                                                <!-- Aquí mostrarás el porcentaje calculado automáticamente con JavaScript -->
+                                                <span id="porcentaje">0%</span>
+                                            </td>
+                                            <div>
+                                                <p>Total de porcentajes: {{ total_porcentaje|floatformat:2 }}%</p>
+
+                                            </div>
+                                            
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                
+                                <button type="submit" class="btn btn-primary">Guardar Defectos</button>
+                            </form>
+                            <div class="observaciones">
+                                <h3>Observaciones:</h3>
+                                <p>{{ reporte.observaciones }}</p>
+                            </div>
+                                    
+                            <div class="acciones-colectivas">
+                                <h3>Acciones Colectivas:</h3>
+                                <p>{{ reporte.correctivos }}</p>
+                            </div>
+                            
+                            
+            </div>
+        </div>
+    </div>  
+    
+</div>
+</div>
+</main>
+<script>
+    const totalPorcentajeDefectosElement = document.getElementById('total-porcentaje-defectos');
+    let porcentajesDefectos = []; // Array para almacenar los porcentajes
+    
+    document.querySelector('input[name="cantidad"]').addEventListener('input', function () {
+        const cantidad = parseFloat(this.value);
+        const totalCamaron = parseFloat('{{ reporte.total_camaron }}');
+        const porcentaje = ((cantidad / totalCamaron) * 100).toFixed(2);
+        document.querySelector('#porcentaje').textContent = porcentaje + '%';
+    });
+    
+    const agregarDefectoButton = document.getElementById('agregar-defecto');
+    const defectosGuardadosList = document.getElementById('defectos-guardados');
+    const defectoSelect = document.getElementById('nuevo-defecto');
+    const cantidadInput = document.getElementById('nueva-cantidad');
+    const porcentajeElement = document.getElementById('porcentaje');
+    
+    agregarDefectoButton.addEventListener('click', function () {
+        const defectoNombre = defectoSelect.value;
+        const cantidad = parseFloat(cantidadInput.value);
+    
+        if (defectoNombre && !isNaN(cantidad)) {
+            const porcentaje = ((cantidad / parseFloat('{{ reporte.total_camaron }}')) * 100).toFixed(2);
+            porcentajesDefectos.push(parseFloat(porcentaje)); // Almacena el porcentaje como número
+    
+            const nuevoElemento = document.createElement('li');
+            nuevoElemento.textContent = `${defectoNombre}: ${cantidad} (${porcentaje}%)`;
+            defectosGuardadosList.appendChild(nuevoElemento);
+    
+            defectoSelect.value = '';
+            cantidadInput.value = '';
+    
+            const totalPorcentaje = porcentajesDefectos.reduce((total, porcentaje) => total + porcentaje, 0);
+            totalPorcentajeDefectosElement.textContent = totalPorcentaje.toFixed(2) + '%';
+        }
+    });
+</script>
+    
+    
+    
+
+<footer>
+    <p>© {{ year }} Tu Empresa</p>
+</footer>
+</body>
+</html>
+
+

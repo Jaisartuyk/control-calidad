@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Estilos CSS para el informe en PDF */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px; 
+            background: #005AA7;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #FFFDE4, #005AA7);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #FFFDE4, #005AA7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+        }  
+        h1 {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 2px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <img src="/media/imagenes/Logo_Ferdera 1.jpg" alt="Logo" width="100" height="50" class="d-inline-block align-text-top">
+    <div clase= "container">
+        <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8 ">
+            <div class="row">
+                <h1>Detalles del Reporte Diario</h1>
+                <header>
+                    <nav>
+                      <ul>
+                        <li><a href="{% url 'home' %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></a></li>
+                      </ul>
+                    </nav>
+                  </header>
+                <h2>Crear Reporte</h2>
+                <div class="card-body">
+                    <form method="POST" action="{% url 'crear-reporte' %}">
+                        {% csrf_token %}
+                        <table>
+                            <tr>
+                                <th>Descripción</th>
+                                <th>Valor</th>
+                            </tr>
+                            <tr>
+                                <td>Nombre del Analista:</td>
+                                <td><input type="text" id="nombre_analista" name="nombre_analista" class="form-control" required></td>
+                                <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                            </tr>
+                            <tr>
+                                <td>Turno:</td>
+                                <td>
+                                    <select id="turno" name="turno" class="form-control" required>
+                                        <option value="Turno de Mañana">Turno de Mañana</option>
+                                        <option value="Turno de Tarde">Turno de Tarde</option>
+                                        <option value="Turno de Noche">Turno de Noche</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Presentación:</td>
+                                <td>
+                                    <select id="presentacion" name="presentacion" class="form-control" required>
+                                        <option value="PyD">PyD</option>
+                                        <option value="PPV">PPV</option>
+                                        <option value="Otro">Otro</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Hora:</td>
+                                <td><input type="time" id="hora" name="hora" class="form-control" required></td>
+                            </tr>
+                            <tr>
+                                <td>Fecha:</td>
+                                <td><input type="date" name="fecha" required></td>
+                            </tr>
+                            <tr>
+                                <td>Lote:</td>
+                                <td><input type="number" id="lote" name="lote" class="form-control"></td>
+                            </tr>
+                            <tr>
+                                <td>Marca Funda:</td>
+                                <td><input type="text" id="marca_funda_manual" name="marca_funda_manual" class="form-control"></td>
+                            </tr>
+                            <tr>
+                                <td>Peso sin Funda:</td>
+                                <td><input type="number" id="peso_sin_funda_manual" name="peso_sin_funda_manual" class="form-control" step="0.01" required></td>
+                            </tr>
+                            <tr>
+                                <td>Peso Bruto:</td>
+                                <td><input type="number" id="peso_bruto" name="peso_bruto" class="form-control" step="0.01" required></td>
+                            </tr>
+                            <tr>
+                                <td>Peso Neto:</td>
+                                <td><input type="number" id="peso_neto" name ="peso_neto"  class="form-control" step="0.01" required></td>
+                            </tr>
+                            <tr>
+                                <td>Clasificación:</td>
+                                <td>
+                                    <select id="id_clasificacion" name="clasificacion" class="form-control">
+                                        <option value="">Ingrese talla</option>
+                                        <option value="16-20">16-20</option>
+                                        <option value="21-25">21-25</option>
+                                        <option value="31-35">31-35</option>
+                                        <option value="36-40">36-40</option>
+                                        <option value="51-60">51-60</option>
+                                        <option value="61-70">61-70</option>
+                                        <option value="71-90">71-90</option>
+                                        <!-- Agrega otras opciones de clasificación aquí -->
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Cuenta por Libras:</td>
+                                <td><input type="number" id="cuenta_lbs" name="cuenta_lbs" class="form-control" required></td>
+                            </tr>
+                            <tr>
+                                <td>Total de Camarones:</td>
+                                <td><input type="number" id="total_camaron" name="total_camaron" class="form-control"></td>
+                            </tr>
+                            <tr>
+                                <td>Camarones Grandes (G):</td>
+                                <td><input type="number" id="camarones_grandes" name="camarones_grandes" class="form-control"></td>
+                            </tr>
+                            <tr>
+                                <td>Camarones Pequeños (P):</td>
+                                <td><input type="number" id="camarones_pequenos" name="camarones_pequenos" class="form-control"></td>
+                            </tr>
+                            <tr>
+                                <td>Porcentaje Glaseo:</td>
+                                <td><input type="text" id="porcentaje_glaseo" name="porcentaje_glaseo" class="form-control" readonly></td>
+                            </tr>
+                            <tr>
+                                <td>Uniformidad:</td>
+                                <td><input type="text" id="uniformidad" name="uniformidad" class="form-control" readonly></td>
+                            </tr>
+                            
+                        </table>
+                        <div class="form-group" id="mensajeBloqueo" style="color: red; display: none;">
+                            Cuenta por Libras fuera del rango permitido.
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="observaciones">Observaciones:</label>
+                            <textarea id="observaciones" name="observaciones" class="form-control" rows="4"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="correctivos">Correctivos:</label>
+                            <textarea id="correctivos" name="correctivos" class="form-control" rows="4"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" value="Crear_reporte" class="btn btn-success btn-block text-white">Crear</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+   
+    
+<!-- Script JavaScript para el cálculo -->
+<script>
+    // Obtener referencias a los campos de entrada y selección
+    const pesoBrutoInput = document.getElementById('peso_bruto');
+    const pesoNetoInput = document.getElementById('peso_neto');
+    const pesoSinFundaManualInput = document.getElementById('peso_sin_funda_manual');
+    const porcentajeGlaseoInput = document.getElementById('porcentaje_glaseo');
+    const camaronesGrandesInput = document.getElementById('camarones_grandes');
+    const camaronesPequenosInput = document.getElementById('camarones_pequenos');
+    const uniformidadInput = document.getElementById('uniformidad');
+    const marcaFundaSelect = document.getElementById('marca_funda_manual');
+    const clasificacionField = document.getElementById('id_clasificacion');
+    const cuentaLbsField = document.getElementById('cuenta_lbs');
+    const mensajeBloqueo = document.getElementById('mensajeBloqueo');
+
+    // Agregar eventos onchange para calcular el porcentaje de glaseo y la uniformidad
+    pesoBrutoInput.addEventListener('change', calcularPorcentajeGlaseoYUniformidad);
+    pesoNetoInput.addEventListener('change', calcularPorcentajeGlaseoYUniformidad);
+    camaronesGrandesInput.addEventListener('change', calcularPorcentajeGlaseoYUniformidad);
+    camaronesPequenosInput.addEventListener('change', calcularPorcentajeGlaseoYUniformidad);
+    clasificacionField.addEventListener('change', validarCuentaLbsSegunClasificacion);
+    cuentaLbsField.addEventListener('change', validarCuentaLbsSegunClasificacion);
+
+    // Calcular el porcentaje de glaseo y la uniformidad al cargar la página
+    calcularPorcentajeGlaseoYUniformidad();
+    validarCuentaLbsSegunClasificacion();
+
+    // Función para calcular el porcentaje de glaseo y la uniformidad
+    function calcularPorcentajeGlaseoYUniformidad() {
+        const pesoBruto = parseFloat(pesoBrutoInput.value);
+        const pesoNeto = parseFloat(pesoNetoInput.value);
+        const camaronesGrandes = parseFloat(camaronesGrandesInput.value);
+        const camaronesPequenos = parseFloat(camaronesPequenosInput.value);
+
+        if (!isNaN(pesoNeto) && !isNaN(pesoBruto) && !isNaN(camaronesGrandes) && !isNaN(camaronesPequenos)) {
+            const porcentajeGlaseo = ((pesoNeto - pesoSinFundaManualInput.value) / pesoSinFundaManualInput.value) * 100;
+            const uniformidad = (camaronesGrandes / camaronesPequenos) * 100;
+
+            porcentajeGlaseoInput.value = porcentajeGlaseo.toFixed(2);
+            uniformidadInput.value = uniformidad.toFixed(2);
+        }
+    }
+    // Función para validar la cuenta por libras según la clasificación
+    // Función para validar la cuenta por libras según la clasificación
+function validarCuentaLbsSegunClasificacion() {
+    const selectedClasificacion = clasificacionField.value;
+    const cuentaLbsValue = parseInt(cuentaLbsField.value);
+    // Obtener referencias a los campos que deseas bloquear
+    const totalCamaronField = document.getElementById('total_camaron');
+    const camaronesGrandesInput = document.getElementById('camarones_grandes');
+    const camaronesPequenosInput = document.getElementById('camarones_pequenos');
+    const porcentajeGlaseoInput = document.getElementById('porcentaje_glaseo');
+    const uniformidadInput = document.getElementById('uniformidad');
+
+   // Habilita el campo de "Cuenta por Libras" para todas las opciones de clasificación
+   cuentaLbsField.disabled = false;
+
+// Realiza la validación del rango si es necesario
+if (
+    (selectedClasificacion === "16-20" && (cuentaLbsValue < 16 || cuentaLbsValue > 20)) ||
+    (selectedClasificacion === "21-25" && (cuentaLbsValue < 21 || cuentaLbsValue > 25)) ||
+    (selectedClasificacion === "26-30" && (cuentaLbsValue < 26 || cuentaLbsValue > 30)) ||
+    (selectedClasificacion === "31-35" && (cuentaLbsValue < 31 || cuentaLbsValue > 35)) ||
+    (selectedClasificacion === "36-40" && (cuentaLbsValue < 36 || cuentaLbsValue > 40)) ||
+    (selectedClasificacion === "51-60" && (cuentaLbsValue < 51 || cuentaLbsValue > 60)) ||
+    (selectedClasificacion === "61-70" && (cuentaLbsValue < 61 || cuentaLbsValue > 70)) ||
+    (selectedClasificacion === "71-90" && (cuentaLbsValue < 71 || cuentaLbsValue > 90))
+    // Agrega más opciones de clasificación según sea necesario
+) {
+    mensajeBloqueo.style.display = 'block';
+
+    // Bloquear los campos específicos posteriores a "Cuenta por Libras"
+    totalCamaronField.disabled = true;
+    camaronesGrandesInput.disabled = true;
+    camaronesPequenosInput.disabled = true;
+    porcentajeGlaseoInput.disabled = true;
+    uniformidadInput.disabled = true;
+} else {
+    mensajeBloqueo.style.display = 'none';
+
+    // Desbloquear los campos específicos posteriores a "Cuenta por Libras"
+    totalCamaronField.disabled = false;
+    camaronesGrandesInput.disabled = false;
+    camaronesPequenosInput.disabled = false;
+    porcentajeGlaseoInput.disabled = false;
+    uniformidadInput.disabled = false;
+}
+
+}
+  
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+</body>
+</html>
+
+
+
+

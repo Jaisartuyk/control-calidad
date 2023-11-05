@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %} 
+ <nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+      </a>
+    </div>
+  </nav>
+   <!--  <header>
+        <h1>Bienvenido a la página de inicio</h1>
+    </header> -->
+    
+    <main>
+        <div class="b-example-divider"></div>
+
+        <div class="container px-4 py-5" id="hanging-icons">
+          <img src="/static/imagenes/baseline_logout_black_24dp.jpg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+          <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+            <div class="col d-flex align-items-start">
+              <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                <!-- <svg class="bi" width="1em" height="1em"><use xlink:href=/></svg> -->
+              </div>
+              <div>
+                <h2>Crear Reporte</h2>
+                <p>Esta función te permite registrar un nuevo informe diario de manera sencilla y eficiente. . Si tienes alguna pregunta o necesitas asistencia, no dudes en ponerte en contacto con nuestro equipo de soporte.</p>
+                <a href="{% url 'crear-reporte' %}" class="btn btn-primary">
+                  Ingrese
+                </a>
+              </div>
+            </div>
+            <div class="col d-flex align-items-start">
+              <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+              </div>
+              <div>
+                <h2>Lista de Fundas</h2>
+                <p>Nuestra aplicación te brinda acceso a una amplia variedad de fundas de calidad para tus productos.</p>
+                <a href="{% url 'mostrar_datos_funda' %}" class="btn btn-primary">
+                  Ingrese
+                </a>
+              </div>
+            </div>
+            <div class="col d-flex align-items-start">
+              <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+              </div>
+              <div>
+                <h2>Lista de Reportes</h2>
+                <p>En esta sección, encontrarás una lista completa de todos los informes diarios registrados en nuestra aplicación. </p>
+                <a href="{% url 'ver-reportes' %}" class="btn btn-primary">
+                  Ingrese
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        
+    </main>
+    
+    <footer>
+        <p>© 2023 Mi Proyecto</p>
+    </footer> 
+{% endblock %}

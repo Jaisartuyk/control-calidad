@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ingresar Datos de Funda</title>
+    <!-- Agrega tus estilos CSS si es necesario -->
+</head>
+<body>
+    <h1>Ingresar Datos de Funda</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar</button>
+    </form>
+    
+    
+    <!-- <form method="POST" action="/mostrar_datos_funda/">
+        {% csrf_token %}
+        <label for="marca">Marca de Funda:</label>
+        <input type="text" id="marca" name="marca_funda" required><br><br>
+
+        <label for="peso">Peso de Funda:</label>
+        <input type="number" id="peso" name="peso_funda" step="0.01" required><br><br>
+
+        <input type="submit" value="Guardar Datos">
+    </form> -->
+</body>
+</html>

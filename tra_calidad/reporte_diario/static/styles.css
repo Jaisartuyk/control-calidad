@@ -1,0 +1,35 @@
+/* Definición de colores */
+.Body {
+  background: #56CCF2;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #2F80ED, #56CCF2);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #2F80ED, #56CCF2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+:root {
+    --color-primary: #007bff;
+    --color-secondary: #6c757d;
+    --color-background: #f8f9fa;
+    /* Agrega más colores según tu paleta */
+  }
+  
+  /* Utilización de colores en elementos */
+  .button {
+    background-color: var(--color-primary);
+    color: white;
+  }
+  
+  .header {
+    background-color: var(--color-secondary);
+    color: white;
+  }
+/* Ejemplo de uso de márgenes y padding */
+.container {
+    margin: 20px;
+    padding: 10px;
+  }
+  
+  .card {
+    margin-bottom: 15px;
+    padding: 20px;
+  }
+    
